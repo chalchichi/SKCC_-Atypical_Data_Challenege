@@ -1,3 +1,37 @@
+
+data=open('./gdrive/My Drive/SKCC/2_텍스트/ml_6_spacing_train.csv')
+rdr = csv.reader(data)
+total=[]
+y=[]
+s=[]
+for ol in rdr:
+    line=ol[0]
+    s.append(line)
+    word=[]
+    for w in line:
+        vec=[0]*26
+        vec[(ord(w)-97)]=1
+        word+=vec
+    for i in range(16-len(line)):
+        word+=[0]*26
+    ans=[0]*16
+    if ol[3]=="":
+        ans[len(ol[1])-1]=1
+    else:
+        ans[len(ol[1])-1]=1
+        ans[len(ol[1])+len(ol[2])-1]=1
+    total.append(word)
+    y.append(ans)
+total.pop(0)
+y.pop(0)
+print(y)
+####신경망 학습###
+import tensorflow as tf
+import numpy as np
+ 
+# [꼬리(tail), 짖음(bark), 다리갯수(legs), 크기(size(cm))]
+x_data = np.array(total)
+y_data = np.array(y)
 #########
 # 신경망 모델 구성
 ######
