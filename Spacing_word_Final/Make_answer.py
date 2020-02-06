@@ -38,6 +38,7 @@ def make(word):
         temp += [0] * (n - len(temp))
     return temp
 
+
 for word in data:
     l=make(word[0])
     new.append(l)
